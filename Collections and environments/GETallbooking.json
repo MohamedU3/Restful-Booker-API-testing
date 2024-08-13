@@ -1,0 +1,1319 @@
+{
+	"info": {
+		"_postman_id": "3a061046-3129-488c-bb7b-55d54fc94b56",
+		"name": "GET all booking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36930213"
+	},
+	"item": [
+		{
+			"name": "Create Booking",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is present in header\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"var verifyBody = pm.test(\"Verifying response body\", function () {\r",
+							"\tvar jsonData = pm.response.json();\r",
+							"    pm.test(\"Response has BookingID\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"bookingid\");\r",
+							"    });\r",
+							"\tpm.expect(jsonData.booking.firstname).to.eql(\"Mohamed\");\r",
+							"\tpm.expect(jsonData.booking.lastname).to.eql(\"Yosry\");\r",
+							"\tpm.expect(jsonData.booking.totalprice).to.eql(6969);\r",
+							"\tpm.expect(jsonData.booking.depositpaid).to.eql(true);\r",
+							"\tpm.expect(jsonData.booking.bookingdates.checkin).to.eql(\"2024-07-06\");\r",
+							"\tpm.expect(jsonData.booking.bookingdates.checkout).to.eql(\"2024-07-16\");\r",
+							"\tpm.expect(jsonData.booking.additionalneeds).to.eql(\"Pizza and Cheese burger\");\r",
+							"});\r",
+							"\r",
+							"if(verifyBody){\r",
+							"    jsonFile = pm.response.json();\r",
+							"    pm.collectionVariables.set(\"bookingID_GETALL\", jsonFile.bookingid);\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstname\" : \"Mohamed\",\r\n    \"lastname\" : \"Yosry\",\r\n    \"totalprice\" : 6969,\r\n    \"depositpaid\" : true,\r\n    \"bookingdates\" : {\r\n        \"checkin\" : \"2024-07-06\",\r\n        \"checkout\" : \"2024-07-16\"\r\n    },\r\n    \"additionalneeds\" : \"Pizza and Cheese burger\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://restful-booker.herokuapp.com/booking",
+					"protocol": "https",
+					"host": [
+						"restful-booker",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"booking"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST \\\r\n  https://restful-booker.herokuapp.com/booking \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n    \"firstname\" : \"Jim\",\r\n    \"lastname\" : \"Brown\",\r\n    \"totalprice\" : 111,\r\n    \"depositpaid\" : true,\r\n    \"bookingdates\" : {\r\n        \"checkin\" : \"2018-01-01\",\r\n        \"checkout\" : \"2019-01-01\"\r\n    },\r\n    \"additionalneeds\" : \"Breakfast\"\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "GET all bookings test case 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://restful-booker.herokuapp.com/booking",
+					"protocol": "https",
+					"host": [
+						"restful-booker",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"booking"
+					],
+					"query": [
+						{
+							"key": "firstname",
+							"value": "Mohamed",
+							"disabled": true
+						},
+						{
+							"key": "lastname",
+							"value": "Yosry",
+							"disabled": true
+						},
+						{
+							"key": "checkin",
+							"value": "2024-07-06",
+							"disabled": true
+						},
+						{
+							"key": "checkout",
+							"value": "2024-07-16",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -i [https://restful-booker.herokuapp.com/booking](https://restful-booker.herokuapp.com/booking)"
+			},
+			"response": []
+		},
+		{
+			"name": "GET all bookings test case 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validating booking id value\",function(){\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(pm.collectionVariables.get(\"bookingID\")).to.eql(jsonData[0].bookingid);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://restful-booker.herokuapp.com/booking?firstname=Mohamed&lastname=Yosry",
+					"protocol": "https",
+					"host": [
+						"restful-booker",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"booking"
+					],
+					"query": [
+						{
+							"key": "firstname",
+							"value": "Mohamed"
+						},
+						{
+							"key": "checkin",
+							"value": "2024-07-06",
+							"disabled": true
+						},
+						{
+							"key": "checkout",
+							"value": "2024-07-16",
+							"disabled": true
+						},
+						{
+							"key": "lastname",
+							"value": "Yosry"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -i [https://restful-booker.herokuapp.com/booking](https://restful-booker.herokuapp.com/booking)"
+			},
+			"response": []
+		},
+		{
+			"name": "GET all bookings test case 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validating booking id value\",function(){\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(pm.collectionVariables.get(\"bookingID\")).to.eql(jsonData[0].bookingid);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://restful-booker.herokuapp.com/booking?firstname=Mohamed",
+					"protocol": "https",
+					"host": [
+						"restful-booker",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"booking"
+					],
+					"query": [
+						{
+							"key": "lastname",
+							"value": "Yosry",
+							"disabled": true
+						},
+						{
+							"key": "checkin",
+							"value": "2024-07-06",
+							"disabled": true
+						},
+						{
+							"key": "checkout",
+							"value": "2024-07-16",
+							"disabled": true
+						},
+						{
+							"key": "firstname",
+							"value": "Mohamed"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -i [https://restful-booker.herokuapp.com/booking](https://restful-booker.herokuapp.com/booking)"
+			},
+			"response": []
+		},
+		{
+			"name": "GET all bookings test case 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validating booking id value\",function(){\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(pm.collectionVariables.get(\"bookingID\")).to.eql(jsonData[0].bookingid);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://restful-booker.herokuapp.com/booking?lastname=Yosry",
+					"protocol": "https",
+					"host": [
+						"restful-booker",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"booking"
+					],
+					"query": [
+						{
+							"key": "firstname",
+							"value": "Mohamed",
+							"disabled": true
+						},
+						{
+							"key": "lastname",
+							"value": "Yosry"
+						},
+						{
+							"key": "checkin",
+							"value": "2024-07-06",
+							"disabled": true
+						},
+						{
+							"key": "checkout",
+							"value": "2024-07-16",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -i [https://restful-booker.herokuapp.com/booking](https://restful-booker.herokuapp.com/booking)"
+			},
+			"response": []
+		},
+		{
+			"name": "GET all bookings test case 5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validating booking id value\",function(){\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(pm.collectionVariables.get(\"bookingID\")).to.eql(jsonData[0].bookingid);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://restful-booker.herokuapp.com/booking?checkin=2024-07-06&checkout=2024-07-16",
+					"protocol": "https",
+					"host": [
+						"restful-booker",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"booking"
+					],
+					"query": [
+						{
+							"key": "firstname",
+							"value": "Mohamed",
+							"disabled": true
+						},
+						{
+							"key": "lastname",
+							"value": "Yosry",
+							"disabled": true
+						},
+						{
+							"key": "checkin",
+							"value": "2024-07-06"
+						},
+						{
+							"key": "checkout",
+							"value": "2024-07-16"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -i [https://restful-booker.herokuapp.com/booking](https://restful-booker.herokuapp.com/booking)"
+			},
+			"response": []
+		},
+		{
+			"name": "GET all bookings test case 6",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validating booking id value\",function(){\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(pm.collectionVariables.get(\"bookingID\")).to.eql(jsonData[0].bookingid);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://restful-booker.herokuapp.com/booking?checkin=2024-07-06",
+					"protocol": "https",
+					"host": [
+						"restful-booker",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"booking"
+					],
+					"query": [
+						{
+							"key": "firstname",
+							"value": "Mohamed",
+							"disabled": true
+						},
+						{
+							"key": "lastname",
+							"value": "Yosry",
+							"disabled": true
+						},
+						{
+							"key": "checkin",
+							"value": "2024-07-06"
+						},
+						{
+							"key": "checkout",
+							"value": "2024-07-16",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -i [https://restful-booker.herokuapp.com/booking](https://restful-booker.herokuapp.com/booking)"
+			},
+			"response": []
+		},
+		{
+			"name": "GET all bookings test case 7",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validating booking id value\",function(){\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(pm.collectionVariables.get(\"bookingID\")).to.eql(jsonData[0].bookingid);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://restful-booker.herokuapp.com/booking?checkout=2024-07-16",
+					"protocol": "https",
+					"host": [
+						"restful-booker",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"booking"
+					],
+					"query": [
+						{
+							"key": "firstname",
+							"value": "Mohamed",
+							"disabled": true
+						},
+						{
+							"key": "lastname",
+							"value": "Yosry",
+							"disabled": true
+						},
+						{
+							"key": "checkin",
+							"value": "2024-07-06",
+							"disabled": true
+						},
+						{
+							"key": "checkout",
+							"value": "2024-07-16"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -i [https://restful-booker.herokuapp.com/booking](https://restful-booker.herokuapp.com/booking)"
+			},
+			"response": []
+		},
+		{
+			"name": "GET all bookings test case 8",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"// Changed validation to check that the booking ID value is NOT equal to the response value\r",
+							"pm.test(\"Body doesn't have bookingid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"bookingid\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://restful-booker.herokuapp.com/booking?firstname=1234",
+					"protocol": "https",
+					"host": [
+						"restful-booker",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"booking"
+					],
+					"query": [
+						{
+							"key": "firstname",
+							"value": "1234"
+						},
+						{
+							"key": "lastname",
+							"value": "Yosry",
+							"disabled": true
+						},
+						{
+							"key": "checkin",
+							"value": "2024-07-06",
+							"disabled": true
+						},
+						{
+							"key": "checkout",
+							"value": "2024-07-16",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -i [https://restful-booker.herokuapp.com/booking](https://restful-booker.herokuapp.com/booking)"
+			},
+			"response": []
+		},
+		{
+			"name": "GET all bookings test case 9",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body doesn't have bookingid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"bookingid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://restful-booker.herokuapp.com/booking?firstname=@@@",
+					"protocol": "https",
+					"host": [
+						"restful-booker",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"booking"
+					],
+					"query": [
+						{
+							"key": "firstname",
+							"value": "@@@"
+						},
+						{
+							"key": "lastname",
+							"value": "Yosry",
+							"disabled": true
+						},
+						{
+							"key": "checkin",
+							"value": "2024-07-06",
+							"disabled": true
+						},
+						{
+							"key": "checkout",
+							"value": "2024-07-16",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -i [https://restful-booker.herokuapp.com/booking](https://restful-booker.herokuapp.com/booking)"
+			},
+			"response": []
+		},
+		{
+			"name": "GET all bookings test case 10",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body doesn't have bookingid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"bookingid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://restful-booker.herokuapp.com/booking?firstname=           ",
+					"protocol": "https",
+					"host": [
+						"restful-booker",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"booking"
+					],
+					"query": [
+						{
+							"key": "firstname",
+							"value": "           "
+						},
+						{
+							"key": "lastname",
+							"value": "Yosry",
+							"disabled": true
+						},
+						{
+							"key": "checkin",
+							"value": "2024-07-06",
+							"disabled": true
+						},
+						{
+							"key": "checkout",
+							"value": "2024-07-16",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -i [https://restful-booker.herokuapp.com/booking](https://restful-booker.herokuapp.com/booking)"
+			},
+			"response": []
+		},
+		{
+			"name": "GET all bookings test case 11",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body doesn't have bookingid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"bookingid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://restful-booker.herokuapp.com/booking?firstname=Moha123med",
+					"protocol": "https",
+					"host": [
+						"restful-booker",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"booking"
+					],
+					"query": [
+						{
+							"key": "firstname",
+							"value": "Moha123med"
+						},
+						{
+							"key": "lastname",
+							"value": "Yosry",
+							"disabled": true
+						},
+						{
+							"key": "checkin",
+							"value": "2024-07-06",
+							"disabled": true
+						},
+						{
+							"key": "checkout",
+							"value": "2024-07-16",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -i [https://restful-booker.herokuapp.com/booking](https://restful-booker.herokuapp.com/booking)"
+			},
+			"response": []
+		},
+		{
+			"name": "GET all bookings test case 12",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body doesn't have bookingid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"bookingid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://restful-booker.herokuapp.com/booking?firstname=Moha@@@med",
+					"protocol": "https",
+					"host": [
+						"restful-booker",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"booking"
+					],
+					"query": [
+						{
+							"key": "firstname",
+							"value": "Moha@@@med"
+						},
+						{
+							"key": "lastname",
+							"value": "Yosry",
+							"disabled": true
+						},
+						{
+							"key": "checkin",
+							"value": "2024-07-06",
+							"disabled": true
+						},
+						{
+							"key": "checkout",
+							"value": "2024-07-16",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -i [https://restful-booker.herokuapp.com/booking](https://restful-booker.herokuapp.com/booking)"
+			},
+			"response": []
+		},
+		{
+			"name": "GET all bookings test case 13",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body doesn't have bookingid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"bookingid\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://restful-booker.herokuapp.com/booking?firstname=MOHAMED",
+					"protocol": "https",
+					"host": [
+						"restful-booker",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"booking"
+					],
+					"query": [
+						{
+							"key": "firstname",
+							"value": "MOHAMED"
+						},
+						{
+							"key": "lastname",
+							"value": "Yosry",
+							"disabled": true
+						},
+						{
+							"key": "checkin",
+							"value": "2024-07-06",
+							"disabled": true
+						},
+						{
+							"key": "checkout",
+							"value": "2024-07-16",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -i [https://restful-booker.herokuapp.com/booking](https://restful-booker.herokuapp.com/booking)"
+			},
+			"response": []
+		},
+		{
+			"name": "GET all bookings test case 14",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body doesn't have bookingid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"bookingid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://restful-booker.herokuapp.com/booking?firstname=MohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamed",
+					"protocol": "https",
+					"host": [
+						"restful-booker",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"booking"
+					],
+					"query": [
+						{
+							"key": "firstname",
+							"value": "MohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamedMohamed"
+						},
+						{
+							"key": "lastname",
+							"value": "Yosry",
+							"disabled": true
+						},
+						{
+							"key": "checkin",
+							"value": "2024-07-06",
+							"disabled": true
+						},
+						{
+							"key": "checkout",
+							"value": "2024-07-16",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -i [https://restful-booker.herokuapp.com/booking](https://restful-booker.herokuapp.com/booking)"
+			},
+			"response": []
+		},
+		{
+			"name": "GET all bookings test case 15",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body doesn't have bookingid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"bookingid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://restful-booker.herokuapp.com/booking?checkin=2024/07/06&checkout=2024/07/16",
+					"protocol": "https",
+					"host": [
+						"restful-booker",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"booking"
+					],
+					"query": [
+						{
+							"key": "firstname",
+							"value": "Mohamed",
+							"disabled": true
+						},
+						{
+							"key": "lastname",
+							"value": "Yosry",
+							"disabled": true
+						},
+						{
+							"key": "checkin",
+							"value": "2024/07/06"
+						},
+						{
+							"key": "checkout",
+							"value": "2024/07/16"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -i [https://restful-booker.herokuapp.com/booking](https://restful-booker.herokuapp.com/booking)"
+			},
+			"response": []
+		},
+		{
+			"name": "GET all bookings test case 16",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body doesn't have bookingid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"bookingid\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://restful-booker.herokuapp.com/booking?checkin=2024.07.06&checkout=2024.07.16",
+					"protocol": "https",
+					"host": [
+						"restful-booker",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"booking"
+					],
+					"query": [
+						{
+							"key": "firstname",
+							"value": "Mohamed",
+							"disabled": true
+						},
+						{
+							"key": "lastname",
+							"value": "Yosry",
+							"disabled": true
+						},
+						{
+							"key": "checkin",
+							"value": "2024.07.06"
+						},
+						{
+							"key": "checkout",
+							"value": "2024.07.16"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -i [https://restful-booker.herokuapp.com/booking](https://restful-booker.herokuapp.com/booking)"
+			},
+			"response": []
+		},
+		{
+			"name": "GET all bookings test case 17",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Body doesn't have bookingid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"bookingid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://restful-booker.herokuapp.com/booking?checkin=2024.07.06",
+					"protocol": "https",
+					"host": [
+						"restful-booker",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"booking"
+					],
+					"query": [
+						{
+							"key": "firstname",
+							"value": "Mohamed",
+							"disabled": true
+						},
+						{
+							"key": "lastname",
+							"value": "Yosry",
+							"disabled": true
+						},
+						{
+							"key": "checkout",
+							"value": "2024.07.16",
+							"disabled": true
+						},
+						{
+							"key": "checkin",
+							"value": "2024.07.06"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -i [https://restful-booker.herokuapp.com/booking](https://restful-booker.herokuapp.com/booking)"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "bookingID",
+			"value": ""
+		},
+		{
+			"key": "bookingID_GETALL",
+			"value": ""
+		}
+	]
+}
